@@ -1,5 +1,5 @@
 import reflex as rx
 
 config = rx.Config(
-    app_name="Lab2_Estructura",
+    app_name="lab2_estructura",
 )
