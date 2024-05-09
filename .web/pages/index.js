@@ -16,34 +16,6 @@ import NextHead from "next/head"
 
 
 
-export function Div_bf79c007f67caa07440c53aebe09206f () {
-  const state__state_map = useContext(StateContexts.state__state_map)
-
-
-
-  return (
-    <div css={{"width": "100%", "display": "block", "position": "absolute", "left": "0px", "right": "0px", "top": "0px", "bottom": "0px", "overflow": "hidden"}} dangerouslySetInnerHTML={{"__html": state__state_map.map}}/>
-  )
-}
-
-export function Fragment_cb5edf864ed730e6ef1545318d0da5a2 () {
-  const [addEvents, connectErrors] = useContext(EventLoopContext);
-
-
-
-  return (
-    <Fragment>
-  {isTrue(connectErrors.length > 0) ? (
-  <Fragment>
-  <LucideWifiOffIcon css={{"color": "crimson", "zIndex": 9999, "position": "fixed", "bottom": "30px", "right": "30px", "animation": `${pulse} 1s infinite`}} size={32}/>
-</Fragment>
-) : (
-  <Fragment/>
-)}
-</Fragment>
-  )
-}
-
 export function Root_f7b6263957477820e0c1a00463462224 () {
   const [addEvents, connectErrors] = useContext(EventLoopContext);
 
@@ -87,21 +59,114 @@ export function Root_f7b6263957477820e0c1a00463462224 () {
   )
 }
 
-export function Fragment_e86a1be30916a8add225999e12863068 () {
+export function Div_bf79c007f67caa07440c53aebe09206f () {
+  const state__state_map = useContext(StateContexts.state__state_map)
+
+
+
+  return (
+    <div css={{"width": "100%", "display": "block", "position": "absolute", "left": "0px", "right": "0px", "top": "0px", "bottom": "0px", "overflow": "hidden"}} dangerouslySetInnerHTML={{"__html": state__state_map.map}}/>
+  )
+}
+
+export function Root_d75a273f82829632ede363faebd3865f () {
+  const [addEvents, connectErrors] = useContext(EventLoopContext);
+
+
+  
+    const handleSubmit_32965986460d8ed873fdfaf602d8bc8a = useCallback((ev) => {
+        const $form = ev.target
+        ev.preventDefault()
+        const form_data = {...Object.fromEntries(new FormData($form).entries()), ...{}}
+
+        addEvents([Event("state.state_map.get_code_airport", {form_data:form_data})])
+
+        if (true) {
+            $form.reset()
+        }
+    })
+    
+
+  return (
+    <RadixFormRoot className={`Root`} css={{"width": "100%"}} onSubmit={handleSubmit_32965986460d8ed873fdfaf602d8bc8a}>
+  <RadixThemesFlex css={{"width": "100%"}} direction={`column`} justify={`center`}>
+  <RadixThemesTextField.Input css={{"width": "100%", "height": "40px"}} name={`code_input`} placeholder={`Ex: SFO`} required={true}/>
+  <RadixThemesButton css={{"width": "100%", "height": "40px", "marginBottom": "15px", "marginTop": "20px"}} type={`submit`}>
+  {`Consult`}
+</RadixThemesButton>
+</RadixThemesFlex>
+</RadixFormRoot>
+  )
+}
+
+const pulse = keyframes`
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+`
+
+
+export function Fragment_cb5edf864ed730e6ef1545318d0da5a2 () {
+  const [addEvents, connectErrors] = useContext(EventLoopContext);
+
+
+
+  return (
+    <Fragment>
+  {isTrue(connectErrors.length > 0) ? (
+  <Fragment>
+  <LucideWifiOffIcon css={{"color": "crimson", "zIndex": 9999, "position": "fixed", "bottom": "30px", "right": "30px", "animation": `${pulse} 1s infinite`}} size={32}/>
+</Fragment>
+) : (
+  <Fragment/>
+)}
+</Fragment>
+  )
+}
+
+export function Fragment_36785ecb30370b3fda16b95439096d9b () {
   const state__state_map = useContext(StateContexts.state__state_map)
 
 
 
   return (
     <Fragment>
-  {isTrue(state__state_map.state_callout_1) ? (
+  {isTrue(state__state_map.state_callout) ? (
   <Fragment>
   <RadixThemesCallout.Root css={{"icon": "info"}}>
   <RadixThemesCallout.Icon>
   <LucideInfoIcon css={{"color": "var(--current-color)"}}/>
 </RadixThemesCallout.Icon>
   <RadixThemesCallout.Text>
-  {`Cordinate must have a comma between latitude and longitude`}
+  {`Airport's code not found.`}
+</RadixThemesCallout.Text>
+</RadixThemesCallout.Root>
+</Fragment>
+) : (
+  <Fragment/>
+)}
+</Fragment>
+  )
+}
+
+export function Fragment_6607534aa8f638118acac90a6d45c99d () {
+  const state__state_map = useContext(StateContexts.state__state_map)
+
+
+
+  return (
+    <Fragment>
+  {isTrue(state__state_map.state_callout_2) ? (
+  <Fragment>
+  <RadixThemesCallout.Root css={{"icon": "info"}}>
+  <RadixThemesCallout.Icon>
+  <LucideInfoIcon css={{"color": "var(--current-color)"}}/>
+</RadixThemesCallout.Icon>
+  <RadixThemesCallout.Text>
+  {`All or one of the codes were not found.`}
 </RadixThemesCallout.Text>
 </RadixThemesCallout.Root>
 </Fragment>
@@ -141,41 +206,6 @@ export function Fragment_6499b51736be44284c15de43340cb16c () {
 </Fragment>
   )
 }
-
-export function Fragment_1fdd161e74d1beb7f6a353bbe27d5b56 () {
-  const state__state_map = useContext(StateContexts.state__state_map)
-
-
-
-  return (
-    <Fragment>
-  {isTrue(state__state_map.state_callout) ? (
-  <Fragment>
-  <RadixThemesCallout.Root css={{"icon": "info"}}>
-  <RadixThemesCallout.Icon>
-  <LucideInfoIcon css={{"color": "var(--current-color)"}}/>
-</RadixThemesCallout.Icon>
-  <RadixThemesCallout.Text>
-  {`Cordinate must have a comma between latitude and longitude`}
-</RadixThemesCallout.Text>
-</RadixThemesCallout.Root>
-</Fragment>
-) : (
-  <Fragment/>
-)}
-</Fragment>
-  )
-}
-
-const pulse = keyframes`
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-`
-
 
 export function Root_0a11fb96d8377430df7674bc8386ba8d () {
   const [addEvents, connectErrors] = useContext(EventLoopContext);
@@ -256,7 +286,7 @@ export default function Component() {
   <RadixThemesFlex css={{"display": "flex", "alignItems": "center", "justifyContent": "center"}}>
   <RadixThemesTabs.List css={{"marginBottom": "30px"}}>
   <RadixThemesTabs.Trigger css={{"margin": "0 25px 0 0"}} value={`tab1`}>
-  {`Cordinates`}
+  {`Airport code`}
 </RadixThemesTabs.Trigger>
   <RadixThemesTabs.Trigger css={{"margin": "0 0 0 25px"}} value={`tab2`}>
   {`Airport codes`}
@@ -267,18 +297,11 @@ export default function Component() {
   <RadixThemesTabs.Content css={{"width": "100%"}} value={`tab1`}>
   <RadixThemesFlex css={{"width": "100%"}}>
   <RadixThemesText as={`p`} css={{"aling": "center"}} size={`1`}>
-  {`Enter a cordinate below`}
+  {`Enter a code below`}
 </RadixThemesText>
 </RadixThemesFlex>
-  <RadixFormRoot className={`Root`} css={{"width": "100%"}}>
-  <RadixThemesFlex css={{"width": "100%"}} direction={`column`} justify={`center`}>
-  <RadixThemesTextField.Input css={{"width": "100%", "height": "40px"}} name={`cordinate input`} placeholder={`Ex: 10.96854, -74.78132`} required={true}/>
-  <RadixThemesButton css={{"width": "100%", "height": "40px", "marginBottom": "15px", "marginTop": "20px"}} type={`submit`}>
-  {`Submit`}
-</RadixThemesButton>
-</RadixThemesFlex>
-</RadixFormRoot>
-  <Fragment_e86a1be30916a8add225999e12863068/>
+  <Root_d75a273f82829632ede363faebd3865f/>
+  <Fragment_36785ecb30370b3fda16b95439096d9b/>
 </RadixThemesTabs.Content>
 </RadixThemesFlex>
   <RadixThemesFlex css={{"width": "100%"}} direction={`column`}>
@@ -286,7 +309,7 @@ export default function Component() {
   <RadixThemesFlex css={{"width": "100%"}}>
   <Root_f7b6263957477820e0c1a00463462224/>
 </RadixThemesFlex>
-  <Fragment_1fdd161e74d1beb7f6a353bbe27d5b56/>
+  <Fragment_6607534aa8f638118acac90a6d45c99d/>
 </RadixThemesTabs.Content>
 </RadixThemesFlex>
 </RadixThemesTabs.Root>
