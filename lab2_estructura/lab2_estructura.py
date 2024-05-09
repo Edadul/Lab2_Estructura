@@ -3,34 +3,19 @@ from lab2_estructura.models.dataframe import *
 from lab2_estructura.models.map import Map
 from lab2_estructura.models.grafo import Graph
 import folium
-
+    
 mapa = Map()
 grafo = Graph()
 dataframe = data
 grafo.add_node(dataframe)
 grafo.add_edge(dataframe)
 
-class State(rx.State):
-    # latitud: float = mapa.get_latitud()
-    # longitud: float = mapa.get_longitud()
-    # map = mapa.map_render._repr_html_()
-
-    # def change_cordinates(self, latitud, longitud):    
-    #     mapa.set_latitud(latitud)
-    #     mapa.set_longitud(longitud)
-    #     self.latitud = mapa.get_latitud()
-    #     self.longitud = mapa.get_longitud()
-    #     mapa.render_map_init()
-    #     self.map = mapa.map_render._repr_html_()
-    
-    # def search_airport(self, cod_airport:str, data: 'pd.DataFrame'):
-    #     mapa.Busqueda_Aeropuerto_cod(cod_airport, data)
-    pass
 
 class StateMap(rx.State):
     map = mapa.map_render._repr_html_()
     state_callout = False
     state_callout_2 = False
+    state_callout_3 = False
 
     def search_cordinate(self, input):
         latitud = input['search_airport'].split(',')[0]
@@ -42,14 +27,14 @@ class StateMap(rx.State):
         self.map = mapa.map_render._repr_html_()
 
     def minimun_path(self, source, target):
-        #try:
-        path = nx.shortest_path(grafo.get_graph(), source, target)
-        path_info = grafo.get_path_info(source, target, dataframe)
-        mapa.draw_minimun_path(path, dataframe, source, target, path_info)
-        # except:
-        #     path = nx.shortest_path(grafo.get_graph(), target, source)
-        #     path_info = grafo.get_path_info(target, source, dataframe)
-        #     mapa.draw_minimun_path(path, dataframe, target, source, path_info)
+        try:
+            dist, path = grafo.dijkstra(source, target)
+            path_info = grafo.get_path_info(source, target, dataframe)
+            mapa.draw_minimun_path(path, dataframe, source, target, path_info)
+        except:
+            path = nx.shortest_path(grafo.get_graph(), target, source)
+            path_info = grafo.get_path_info(target, source, dataframe)
+            mapa.draw_minimun_path(path, dataframe, target, source, path_info)
         self.map = mapa.map_render._repr_html_()
     
     def data_cod(self, form_data: dict):
@@ -57,33 +42,33 @@ class StateMap(rx.State):
         destination: str = form_data['airport_destination']
         list_cod_airports = Airports['Code'].to_list()
         if source.upper() in list_cod_airports and destination.upper() in list_cod_airports:
-            try:
-                self.minimun_path(source.upper(), destination.upper())
+            if source.upper() != destination.upper():
+
+                try:
+                    self.minimun_path(source.upper(), destination.upper())
+                    self.state_callout_2 = False
+                    self.state_callout_3 = False
+                except:
+                    mapa.render_map_init()
+                    self.map = mapa.map_render._repr_html_()
+                    self.state_callout_2 = True
+                    self.state_callout_3 = False
+            else:
+                self.state_callout_3 = True
                 self.state_callout_2 = False
-            except:
-                mapa.render_map_init()
-                self.map = mapa.map_render._repr_html_()
-                self.state_callout_2 = True
         else:
             mapa.render_map_init()
             self.map = mapa.map_render._repr_html_()
             self.state_callout_2 = True
+            self.state_callout_3 = False
+
 
 
     def minimun_path_max(self, code):
-        mapa.draw_minimun_path_max(grafo.longest_shortest_paths(code), code, data)
+        mapa.draw_minimun_path_max(data)
 
-        longest_paths = grafo.longest_shortest_paths(code)
-        # # Crear un conjunto de nodos de los caminos mínimos para evitar duplicados
-        nodes_in_paths = set()
-        distance_in_paths = []
-        for airport, distance in longest_paths:
-            if airport != code:  # Evitar agregar el nodo de busqueda
-                nodes_in_paths.add(airport)
-                distance_in_paths.append(distance)
-
-        # list_distances = grafo.distances_max_paths(code, data)
-        mapa.add_elements_to_map(nodes_in_paths, code, data, Airports, distance_in_paths)
+        longest_paths, list_distances = grafo.longest_shortest_paths(code)
+        mapa.add_elements_to_map(longest_paths, code, data, Airports, list_distances)
 
         self.map = mapa.map_render._repr_html_()
     
@@ -266,6 +251,11 @@ def index() -> rx.Component:
                                                 StateMap.state_callout_2,
                                                 rx.callout("All or one of the codes were not found.", icon='info'),
                                                 None
+                                            ),
+                                            rx.cond(
+                                                StateMap.state_callout_3,
+                                                rx.callout('The source and destination could not be the same.', icon='info'),
+                                                None,
                                             ),
                                             width='100%',
                                             value='tab2',

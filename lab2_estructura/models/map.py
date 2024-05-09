@@ -125,21 +125,6 @@ class Map():
         folium.Marker([lat_origen, lon_origen], popup=f"{code_origen},{name_origen} ({city_origen}, {country_origen}), lat: {lat_origen}, log:{lon_origen}", icon=folium.Icon(color='green')).add_to(self.map_render)
 
 
-    def draw_minimun_path_max(self, longest_paths, cod_buscar, data: 'pd.DataFrame'):
-        # # Crear un conjunto de nodos de los caminos mínimos para evitar duplicados
-        nodes_in_paths = set()
-        for airport, distance in longest_paths:
-            if airport != cod_buscar:  # Evitar agregar el nodo de busqueda
-                nodes_in_paths.add(airport)
-        print(nodes_in_paths)
-
-        # nodes_in_paths = {Cod_Buscar}  # Incluir el nodo de origen
-        # for airport, _ in longest_paths:
-        #     nodes_in_paths.add(airport)
-            
+    def draw_minimun_path_max(self, data: 'pd.DataFrame'):
         map_center = [data['Source Airport Latitude'].mean(), data['Source Airport Longitude'].mean()]
         self.map_render = folium.Map(location=map_center, zoom_start=3)
-    
-    
-    
-
