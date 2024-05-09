@@ -10,12 +10,45 @@ dataframe = data
 grafo.add_node(dataframe)
 grafo.add_edge(dataframe)
 
+# Crear un mapa centrado en la ubicación promedio de los aeropuertos
+m = folium.Map(location=[data['Source Airport Latitude'].mean(), data['Source Airport Longitude'].mean()], zoom_start=2)
 
+# Añadir marcadores con iconos personalizados de Bootstrap
+for index, row in Airports.iterrows():
+    folium.Marker(
+        location=(row['Airport Latitude'], row['Airport Longitude']),
+        popup = f"{row['Code']}, {row['Airport Name']} - {row['Airport City']}, {row['Airport Country']}, Lat: {row['Airport Latitude']}, log: {row['Airport Longitude']}",
+        icon=folium.Icon(icon='plane', prefix='fa', color='red')
+    ).add_to(m)
+    
+# Registro de aristas dibujadas
+drawn_edges = set()
+
+# Añadir líneas entre los aeropuertos de origen y destino
+for index, row in data.iterrows():
+    edge = tuple(sorted([(row['Source'], row['Destination'])]))  # Ordenar las aristas para evitar duplicados
+    if edge not in drawn_edges:  # Verificar si la arista ya ha sido dibujada en la dirección opuesta
+        tooltip_text = f"From: {row['Source Airport Latitude']}, {row['Source Airport Longitude']} To: {row['Destination Airport Latitude']}, {row['Destination Airport Longitude']} Distance: {row['Weight']} km"
+        line = folium.PolyLine(
+            locations=[
+                (row['Source Airport Latitude'], row['Source Airport Longitude']),
+                (row['Destination Airport Latitude'], row['Destination Airport Longitude'])
+            ],
+            color='blue',
+            weight=3,
+            opacity=0.8,
+            tooltip=tooltip_text  # Añadir tooltip
+        ).add_to(m)
+        drawn_edges.add(edge)
+
+    
 class StateMap(rx.State):
+    #map = m._repr_html_()
     map = mapa.map_render._repr_html_()
     state_callout = False
     state_callout_2 = False
     state_callout_3 = False
+    
 
     def search_cordinate(self, input):
         latitud = input['search_airport'].split(',')[0]

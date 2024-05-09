@@ -16,6 +16,134 @@ import NextHead from "next/head"
 
 
 
+export function Fragment_6499b51736be44284c15de43340cb16c () {
+  const [addEvents, connectErrors] = useContext(EventLoopContext);
+
+
+
+  return (
+    <Fragment>
+  {isTrue(connectErrors.length >= 2) ? (
+  <Fragment>
+  <RadixThemesDialog.Root css={{"zIndex": 9999}} open={connectErrors.length >= 2}>
+  <RadixThemesDialog.Content>
+  <RadixThemesDialog.Title>
+  {`Connection Error`}
+</RadixThemesDialog.Title>
+  <RadixThemesText as={`p`}>
+  {`Cannot connect to server: `}
+  {(connectErrors.length > 0) ? connectErrors[connectErrors.length - 1].message : ''}
+  {`. Check if server is reachable at `}
+  {getBackendURL(env.EVENT).href}
+</RadixThemesText>
+</RadixThemesDialog.Content>
+</RadixThemesDialog.Root>
+</Fragment>
+) : (
+  <Fragment/>
+)}
+</Fragment>
+  )
+}
+
+export function Root_d75a273f82829632ede363faebd3865f () {
+  const [addEvents, connectErrors] = useContext(EventLoopContext);
+
+
+  
+    const handleSubmit_32965986460d8ed873fdfaf602d8bc8a = useCallback((ev) => {
+        const $form = ev.target
+        ev.preventDefault()
+        const form_data = {...Object.fromEntries(new FormData($form).entries()), ...{}}
+
+        addEvents([Event("state.state_map.get_code_airport", {form_data:form_data})])
+
+        if (true) {
+            $form.reset()
+        }
+    })
+    
+
+  return (
+    <RadixFormRoot className={`Root`} css={{"width": "100%"}} onSubmit={handleSubmit_32965986460d8ed873fdfaf602d8bc8a}>
+  <RadixThemesFlex css={{"width": "100%"}} direction={`column`} justify={`center`}>
+  <RadixThemesTextField.Input css={{"width": "100%", "height": "40px"}} name={`code_input`} placeholder={`Ex: SFO`} required={true}/>
+  <RadixThemesButton css={{"width": "100%", "height": "40px", "marginBottom": "15px", "marginTop": "20px"}} type={`submit`}>
+  {`Consult`}
+</RadixThemesButton>
+</RadixThemesFlex>
+</RadixFormRoot>
+  )
+}
+
+export function Fragment_6607534aa8f638118acac90a6d45c99d () {
+  const state__state_map = useContext(StateContexts.state__state_map)
+
+
+
+  return (
+    <Fragment>
+  {isTrue(state__state_map.state_callout_2) ? (
+  <Fragment>
+  <RadixThemesCallout.Root css={{"icon": "info"}}>
+  <RadixThemesCallout.Icon>
+  <LucideInfoIcon css={{"color": "var(--current-color)"}}/>
+</RadixThemesCallout.Icon>
+  <RadixThemesCallout.Text>
+  {`All or one of the codes were not found.`}
+</RadixThemesCallout.Text>
+</RadixThemesCallout.Root>
+</Fragment>
+) : (
+  <Fragment/>
+)}
+</Fragment>
+  )
+}
+
+export function Root_f7b6263957477820e0c1a00463462224 () {
+  const [addEvents, connectErrors] = useContext(EventLoopContext);
+
+
+  
+    const handleSubmit_dc4580462badd1d08a72a0742bda1f29 = useCallback((ev) => {
+        const $form = ev.target
+        ev.preventDefault()
+        const form_data = {...Object.fromEntries(new FormData($form).entries()), ...{}}
+
+        addEvents([Event("state.state_map.data_cod", {form_data:form_data})])
+
+        if (true) {
+            $form.reset()
+        }
+    })
+    
+
+  return (
+    <RadixFormRoot className={`Root`} css={{"width": "100%"}} onSubmit={handleSubmit_dc4580462badd1d08a72a0742bda1f29}>
+  <RadixThemesFlex css={{"width": "100%"}} direction={`column`} justify={`center`}>
+  <RadixThemesFlex css={{"width": "100%"}} justify={`between`} gap={`2`}>
+  <RadixThemesFlex direction={`column`}>
+  <RadixThemesText as={`p`} size={`1`}>
+  {`Place of departure`}
+</RadixThemesText>
+  <RadixThemesTextField.Input css={{"width": "100%", "height": "40px"}} name={`airport_departure`} placeholder={`Ex: BOG`} required={true}/>
+</RadixThemesFlex>
+  <RadixThemesFlex direction={`column`}>
+  <RadixThemesText as={`p`} size={`1`}>
+  {`Place of destination`}
+</RadixThemesText>
+  <RadixThemesTextField.Input css={{"width": "100%", "height": "40px"}} name={`airport_destination`} placeholder={`Ex: BCN`} required={true}/>
+</RadixThemesFlex>
+</RadixThemesFlex>
+  <RadixThemesButton css={{"width": "100%", "height": "40px", "marginBottom": "15px", "marginTop": "20px"}} type={`submit`}>
+  {`Consult`}
+</RadixThemesButton>
+</RadixThemesFlex>
+</RadixFormRoot>
+  )
+}
+
 export function Fragment_cb5edf864ed730e6ef1545318d0da5a2 () {
   const [addEvents, connectErrors] = useContext(EventLoopContext);
 
@@ -69,6 +197,16 @@ export function Fragment_faf796e1ddecefde26a87496d29f0cb2 () {
   )
 }
 
+const pulse = keyframes`
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+`
+
+
 export function Root_0a11fb96d8377430df7674bc8386ba8d () {
   const [addEvents, connectErrors] = useContext(EventLoopContext);
 
@@ -100,49 +238,6 @@ export function Root_0a11fb96d8377430df7674bc8386ba8d () {
   )
 }
 
-export function Root_f7b6263957477820e0c1a00463462224 () {
-  const [addEvents, connectErrors] = useContext(EventLoopContext);
-
-
-  
-    const handleSubmit_dc4580462badd1d08a72a0742bda1f29 = useCallback((ev) => {
-        const $form = ev.target
-        ev.preventDefault()
-        const form_data = {...Object.fromEntries(new FormData($form).entries()), ...{}}
-
-        addEvents([Event("state.state_map.data_cod", {form_data:form_data})])
-
-        if (true) {
-            $form.reset()
-        }
-    })
-    
-
-  return (
-    <RadixFormRoot className={`Root`} css={{"width": "100%"}} onSubmit={handleSubmit_dc4580462badd1d08a72a0742bda1f29}>
-  <RadixThemesFlex css={{"width": "100%"}} direction={`column`} justify={`center`}>
-  <RadixThemesFlex css={{"width": "100%"}} justify={`between`} gap={`2`}>
-  <RadixThemesFlex direction={`column`}>
-  <RadixThemesText as={`p`} size={`1`}>
-  {`Place of departure`}
-</RadixThemesText>
-  <RadixThemesTextField.Input css={{"width": "100%", "height": "40px"}} name={`airport_departure`} placeholder={`Ex: BOG`} required={true}/>
-</RadixThemesFlex>
-  <RadixThemesFlex direction={`column`}>
-  <RadixThemesText as={`p`} size={`1`}>
-  {`Place of destination`}
-</RadixThemesText>
-  <RadixThemesTextField.Input css={{"width": "100%", "height": "40px"}} name={`airport_destination`} placeholder={`Ex: BCN`} required={true}/>
-</RadixThemesFlex>
-</RadixThemesFlex>
-  <RadixThemesButton css={{"width": "100%", "height": "40px", "marginBottom": "15px", "marginTop": "20px"}} type={`submit`}>
-  {`Consult`}
-</RadixThemesButton>
-</RadixThemesFlex>
-</RadixFormRoot>
-  )
-}
-
 export function Fragment_36785ecb30370b3fda16b95439096d9b () {
   const state__state_map = useContext(StateContexts.state__state_map)
 
@@ -160,101 +255,6 @@ export function Fragment_36785ecb30370b3fda16b95439096d9b () {
   {`Airport's code not found.`}
 </RadixThemesCallout.Text>
 </RadixThemesCallout.Root>
-</Fragment>
-) : (
-  <Fragment/>
-)}
-</Fragment>
-  )
-}
-
-export function Root_d75a273f82829632ede363faebd3865f () {
-  const [addEvents, connectErrors] = useContext(EventLoopContext);
-
-
-  
-    const handleSubmit_32965986460d8ed873fdfaf602d8bc8a = useCallback((ev) => {
-        const $form = ev.target
-        ev.preventDefault()
-        const form_data = {...Object.fromEntries(new FormData($form).entries()), ...{}}
-
-        addEvents([Event("state.state_map.get_code_airport", {form_data:form_data})])
-
-        if (true) {
-            $form.reset()
-        }
-    })
-    
-
-  return (
-    <RadixFormRoot className={`Root`} css={{"width": "100%"}} onSubmit={handleSubmit_32965986460d8ed873fdfaf602d8bc8a}>
-  <RadixThemesFlex css={{"width": "100%"}} direction={`column`} justify={`center`}>
-  <RadixThemesTextField.Input css={{"width": "100%", "height": "40px"}} name={`code_input`} placeholder={`Ex: SFO`} required={true}/>
-  <RadixThemesButton css={{"width": "100%", "height": "40px", "marginBottom": "15px", "marginTop": "20px"}} type={`submit`}>
-  {`Consult`}
-</RadixThemesButton>
-</RadixThemesFlex>
-</RadixFormRoot>
-  )
-}
-
-const pulse = keyframes`
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-`
-
-
-export function Fragment_6607534aa8f638118acac90a6d45c99d () {
-  const state__state_map = useContext(StateContexts.state__state_map)
-
-
-
-  return (
-    <Fragment>
-  {isTrue(state__state_map.state_callout_2) ? (
-  <Fragment>
-  <RadixThemesCallout.Root css={{"icon": "info"}}>
-  <RadixThemesCallout.Icon>
-  <LucideInfoIcon css={{"color": "var(--current-color)"}}/>
-</RadixThemesCallout.Icon>
-  <RadixThemesCallout.Text>
-  {`All or one of the codes were not found.`}
-</RadixThemesCallout.Text>
-</RadixThemesCallout.Root>
-</Fragment>
-) : (
-  <Fragment/>
-)}
-</Fragment>
-  )
-}
-
-export function Fragment_6499b51736be44284c15de43340cb16c () {
-  const [addEvents, connectErrors] = useContext(EventLoopContext);
-
-
-
-  return (
-    <Fragment>
-  {isTrue(connectErrors.length >= 2) ? (
-  <Fragment>
-  <RadixThemesDialog.Root css={{"zIndex": 9999}} open={connectErrors.length >= 2}>
-  <RadixThemesDialog.Content>
-  <RadixThemesDialog.Title>
-  {`Connection Error`}
-</RadixThemesDialog.Title>
-  <RadixThemesText as={`p`}>
-  {`Cannot connect to server: `}
-  {(connectErrors.length > 0) ? connectErrors[connectErrors.length - 1].message : ''}
-  {`. Check if server is reachable at `}
-  {getBackendURL(env.EVENT).href}
-</RadixThemesText>
-</RadixThemesDialog.Content>
-</RadixThemesDialog.Root>
 </Fragment>
 ) : (
   <Fragment/>
