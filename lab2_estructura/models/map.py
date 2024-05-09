@@ -82,6 +82,7 @@ class Map():
                             [airport_inter.get_latitude(), airport_inter.get_longitude()], 
                             popup=f"{airport_inter.get_cod_airport()},{airport_inter.get_name()} ({airport_inter.get_city()}, {airport_inter.get_country()}) \nLat: {airport_inter.get_latitude()} Lon: {airport_inter.get_longitude()}").add_to(self.map_render)
     
+    
 
     def add_elements_to_map(self, nodes, cod_buscar, data: 'pd.DataFrame', Airports: 'pd.DataFrame', list: list):
         cont = 0
@@ -103,6 +104,7 @@ class Map():
             if node != cod_buscar:
                 src_info = Airports[Airports.Code == cod_buscar].iloc[0]
                 dst_info = info
+                
                 
                 tooltip_text = f"From: {cod_buscar}, To: {dst_info['Source']}, Distance: {list[cont]} km"
                 folium.PolyLine(
