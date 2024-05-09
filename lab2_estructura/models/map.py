@@ -95,7 +95,7 @@ class Map():
             # Agregar marcador
             folium.Marker(
                 [info['Source Airport Latitude'], info['Source Airport Longitude']],
-                popup=f"{info['Source']}, {info['Source Airport Name']} ({info['Source Airport City']}, {info['Source Airport Country']}) Lat: {info['Source Airport Latitude']}, Lon: {info['Source Airport Longitude']}, Distance from {cod_buscar}: {list[cont]}",
+                popup=f"{info['Source']}, {info['Source Airport Name']} ({info['Source Airport City']}, {info['Source Airport Country']}) Lat: {info['Source Airport Latitude']}, Lon: {info['Source Airport Longitude']}, Distance from {cod_buscar}: {list[cont]} km",
                 icon=folium.Icon(color='red')
             ).add_to(self.map_render)
 
@@ -104,7 +104,7 @@ class Map():
                 src_info = Airports[Airports.Code == cod_buscar].iloc[0]
                 dst_info = info
                 
-                tooltip_text = f"From: {cod_buscar}, To: {dst_info}, Distance: {list[cont]} km"
+                tooltip_text = f"From: {cod_buscar}, To: {dst_info['Source']}, Distance: {list[cont]} km"
                 folium.PolyLine(
                     [(src_info['Airport Latitude'], src_info['Airport Longitude']),
                     (dst_info['Source Airport Latitude'], dst_info['Source Airport Longitude'])],

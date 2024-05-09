@@ -16,6 +16,90 @@ import NextHead from "next/head"
 
 
 
+export function Fragment_cb5edf864ed730e6ef1545318d0da5a2 () {
+  const [addEvents, connectErrors] = useContext(EventLoopContext);
+
+
+
+  return (
+    <Fragment>
+  {isTrue(connectErrors.length > 0) ? (
+  <Fragment>
+  <LucideWifiOffIcon css={{"color": "crimson", "zIndex": 9999, "position": "fixed", "bottom": "30px", "right": "30px", "animation": `${pulse} 1s infinite`}} size={32}/>
+</Fragment>
+) : (
+  <Fragment/>
+)}
+</Fragment>
+  )
+}
+
+export function Div_bf79c007f67caa07440c53aebe09206f () {
+  const state__state_map = useContext(StateContexts.state__state_map)
+
+
+
+  return (
+    <div css={{"width": "100%", "display": "block", "position": "absolute", "left": "0px", "right": "0px", "top": "0px", "bottom": "0px", "overflow": "hidden"}} dangerouslySetInnerHTML={{"__html": state__state_map.map}}/>
+  )
+}
+
+export function Fragment_faf796e1ddecefde26a87496d29f0cb2 () {
+  const state__state_map = useContext(StateContexts.state__state_map)
+
+
+
+  return (
+    <Fragment>
+  {isTrue(state__state_map.state_callout_3) ? (
+  <Fragment>
+  <RadixThemesCallout.Root css={{"icon": "info"}}>
+  <RadixThemesCallout.Icon>
+  <LucideInfoIcon css={{"color": "var(--current-color)"}}/>
+</RadixThemesCallout.Icon>
+  <RadixThemesCallout.Text>
+  {`The source and destination could not be the same.`}
+</RadixThemesCallout.Text>
+</RadixThemesCallout.Root>
+</Fragment>
+) : (
+  <Fragment/>
+)}
+</Fragment>
+  )
+}
+
+export function Root_0a11fb96d8377430df7674bc8386ba8d () {
+  const [addEvents, connectErrors] = useContext(EventLoopContext);
+
+
+  
+    const handleSubmit_472a6fcc67ba9369dbd17f38cc062023 = useCallback((ev) => {
+        const $form = ev.target
+        ev.preventDefault()
+        const form_data = {...Object.fromEntries(new FormData($form).entries()), ...{}}
+
+        addEvents([Event("state.state_map.search_cordinate", {input:form_data})])
+
+        if (true) {
+            $form.reset()
+        }
+    })
+    
+
+  return (
+    <RadixFormRoot className={`Root`} css={{"width": "100%"}} onSubmit={handleSubmit_472a6fcc67ba9369dbd17f38cc062023}>
+  <RadixThemesFlex css={{"width": "auto"}} justify={`between`}>
+  <RadixThemesBox css={{"width": "auto"}}>
+  <RadixThemesFlex>
+  <RadixThemesTextField.Input css={{"backgroundColor": "#FFF", "padding": "10px", "width": "350px", "height": "40px", "boxShadow": "2px 2px 5px #A9A9A9"}} name={`search_airport`} placeholder={`Buscar: 41.89193, 12.51133`} radius={`full`}/>
+</RadixThemesFlex>
+</RadixThemesBox>
+</RadixThemesFlex>
+</RadixFormRoot>
+  )
+}
+
 export function Root_f7b6263957477820e0c1a00463462224 () {
   const [addEvents, connectErrors] = useContext(EventLoopContext);
 
@@ -59,13 +143,28 @@ export function Root_f7b6263957477820e0c1a00463462224 () {
   )
 }
 
-export function Div_bf79c007f67caa07440c53aebe09206f () {
+export function Fragment_36785ecb30370b3fda16b95439096d9b () {
   const state__state_map = useContext(StateContexts.state__state_map)
 
 
 
   return (
-    <div css={{"width": "100%", "display": "block", "position": "absolute", "left": "0px", "right": "0px", "top": "0px", "bottom": "0px", "overflow": "hidden"}} dangerouslySetInnerHTML={{"__html": state__state_map.map}}/>
+    <Fragment>
+  {isTrue(state__state_map.state_callout) ? (
+  <Fragment>
+  <RadixThemesCallout.Root css={{"icon": "info"}}>
+  <RadixThemesCallout.Icon>
+  <LucideInfoIcon css={{"color": "var(--current-color)"}}/>
+</RadixThemesCallout.Icon>
+  <RadixThemesCallout.Text>
+  {`Airport's code not found.`}
+</RadixThemesCallout.Text>
+</RadixThemesCallout.Root>
+</Fragment>
+) : (
+  <Fragment/>
+)}
+</Fragment>
   )
 }
 
@@ -108,49 +207,6 @@ const pulse = keyframes`
     }
 `
 
-
-export function Fragment_cb5edf864ed730e6ef1545318d0da5a2 () {
-  const [addEvents, connectErrors] = useContext(EventLoopContext);
-
-
-
-  return (
-    <Fragment>
-  {isTrue(connectErrors.length > 0) ? (
-  <Fragment>
-  <LucideWifiOffIcon css={{"color": "crimson", "zIndex": 9999, "position": "fixed", "bottom": "30px", "right": "30px", "animation": `${pulse} 1s infinite`}} size={32}/>
-</Fragment>
-) : (
-  <Fragment/>
-)}
-</Fragment>
-  )
-}
-
-export function Fragment_36785ecb30370b3fda16b95439096d9b () {
-  const state__state_map = useContext(StateContexts.state__state_map)
-
-
-
-  return (
-    <Fragment>
-  {isTrue(state__state_map.state_callout) ? (
-  <Fragment>
-  <RadixThemesCallout.Root css={{"icon": "info"}}>
-  <RadixThemesCallout.Icon>
-  <LucideInfoIcon css={{"color": "var(--current-color)"}}/>
-</RadixThemesCallout.Icon>
-  <RadixThemesCallout.Text>
-  {`Airport's code not found.`}
-</RadixThemesCallout.Text>
-</RadixThemesCallout.Root>
-</Fragment>
-) : (
-  <Fragment/>
-)}
-</Fragment>
-  )
-}
 
 export function Fragment_6607534aa8f638118acac90a6d45c99d () {
   const state__state_map = useContext(StateContexts.state__state_map)
@@ -204,37 +260,6 @@ export function Fragment_6499b51736be44284c15de43340cb16c () {
   <Fragment/>
 )}
 </Fragment>
-  )
-}
-
-export function Root_0a11fb96d8377430df7674bc8386ba8d () {
-  const [addEvents, connectErrors] = useContext(EventLoopContext);
-
-
-  
-    const handleSubmit_472a6fcc67ba9369dbd17f38cc062023 = useCallback((ev) => {
-        const $form = ev.target
-        ev.preventDefault()
-        const form_data = {...Object.fromEntries(new FormData($form).entries()), ...{}}
-
-        addEvents([Event("state.state_map.search_cordinate", {input:form_data})])
-
-        if (true) {
-            $form.reset()
-        }
-    })
-    
-
-  return (
-    <RadixFormRoot className={`Root`} css={{"width": "100%"}} onSubmit={handleSubmit_472a6fcc67ba9369dbd17f38cc062023}>
-  <RadixThemesFlex css={{"width": "auto"}} justify={`between`}>
-  <RadixThemesBox css={{"width": "auto"}}>
-  <RadixThemesFlex>
-  <RadixThemesTextField.Input css={{"backgroundColor": "#FFF", "padding": "10px", "width": "350px", "height": "40px", "boxShadow": "2px 2px 5px #A9A9A9"}} name={`search_airport`} placeholder={`Buscar: 41.89193, 12.51133`} radius={`full`}/>
-</RadixThemesFlex>
-</RadixThemesBox>
-</RadixThemesFlex>
-</RadixFormRoot>
   )
 }
 
@@ -310,6 +335,7 @@ export default function Component() {
   <Root_f7b6263957477820e0c1a00463462224/>
 </RadixThemesFlex>
   <Fragment_6607534aa8f638118acac90a6d45c99d/>
+  <Fragment_faf796e1ddecefde26a87496d29f0cb2/>
 </RadixThemesTabs.Content>
 </RadixThemesFlex>
 </RadixThemesTabs.Root>
